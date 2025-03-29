@@ -1,0 +1,11 @@
+{
+  "username": "nmg15949415070@163.com",
+  "password": "Nmg4215070",
+  "python3_executable": "python3",
+  "have_booking": false,
+  "headless": true,
+  "git_upload": false,
+  "wait_timer": 2,
+  "wait_timer_car": 15,
+  "ecr_arn": "1231231231.dkr.ecr.aws-region-1.amazonaws.com"
+}
