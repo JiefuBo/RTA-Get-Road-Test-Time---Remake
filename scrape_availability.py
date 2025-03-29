@@ -42,45 +42,52 @@ else:
 
 
 try:
-    # driver.get("https://www.myrta.com/wps/portal/extvp/myrta/login/")#在这个地方打开RTA的网页（这一行是原生代码）
-    driver.get("https://www.myrta.com/wps/portal/extvp/myrta/licence/tbs/tbs-login/")  # 在这个地方打开RTA的网页（这一行是修改后的代码代码）
-    time.sleep(10)
+    driver.get("https://www.myrta.com/wps/portal/extvp/myrta/licence/tbs/tbs-login/")  # 在这个地方打开RTA的网页
+    time.sleep(8)#等待10秒，确保网页加载完成。这个参数会有调整，暂定参数名internet_delay。
     print("Web Open - Done")
-    # driver.find_element(By.ID,"widget_cardNumber").send_keys(settings['username'])#这个地方是识别输入框的地方，在F12里找对应输入框的ID值
-    driver.find_element(By.ID, "widget_input_familyName").send_keys(
-        settings['username'])  # 从setting.json读取Family Name（这一行是修改后的代码代码）
+
+    driver.find_element(By.ID, "widget_input_familyName").send_keys(settings['username'])  # 从setting.json读取Family Name
     print("Type in Family Name - Done")
-    # driver.find_element(By.ID,"widget_password").send_keys(settings['password'])
-    driver.find_element(By.ID, "widget_rms_noLogin-input-RMSnumb").send_keys(
-        settings['password'])  # 从setting.json读取RMS Customer NO.(8位代码)（这一行是修改后的代码代码）
+    time.sleep(1)
+
+    driver.find_element(By.ID, "widget_rms_noLogin-input-RMSnumb").send_keys(settings['password'])  # 从setting.json读取RMS Customer NO.(8位代码)
     print("Type in Customer NO. - Done")
-    time.sleep(5)#
-    # driver.find_element(By.ID, "nextButton").click()  # 这个地方是识别登录框的地方，在F12里找对应输入框的ID值
+    time.sleep(5)#等待5秒
+
     driver.find_element(By.ID, "submitNoLogin").click()  # 自动点击登录（submitNoLogin）
     print("Click Login - Done")
+    time.sleep(10)#等待5秒登录时间。这个参数会有调整，暂定参数名internet_delay。
+
+    # 判断是否已经预定了
     if (settings['have_booking']):
         driver.find_element(By.XPATH, '//*[text()="Manage booking"]').click()
         driver.find_element(By.ID, "changeLocationButton").click()
         time.sleep(settings['wait_timer'])
     else:
-        driver.find_element(By.XPATH, '//*[text()="Book test"]').click()
-        driver.find_element(By.ID, "CAR").click()
-        time.sleep(settings['wait_timer_car'])
-        driver.find_element(By.XPATH, "//fieldset[@id='DC']/span[contains(@class, 'rms_testItemResult')]").click()
+        # driver.find_element(By.XPATH, '//*[text()="Book test"]').click()
+        # 来到了选择页
+        driver.find_element(By.ID, "CAR").click()#点击CAR
+        time.sleep(1)
+        driver.find_element(By.ID, "c1tt3").click()#点击c1tt3(选择Driving Test)
+        time.sleep(1)
+        driver.find_element(By.ID, "nextButton").click()  # 点击nextButton
+        time.sleep(5)  # 等待5秒登录时间。这个参数会有调整，暂定参数名internet_delay。
+        #来到了须知页
+        driver.find_element(By.ID, "checkTerms").click()  # 点击接受协议
+        time.sleep(1)
+        driver.find_element(By.ID, "nextButton").click()  # 点击下一步
+        print("Terms Page Done")
+        time.sleep(5)  # 等待5秒登录时间。这个参数会有调整，暂定参数名internet_delay。
+        driver.find_element(By.ID, "rms_batLocLocSel").click()# 选择考试地点
         time.sleep(settings['wait_timer'])
-        driver.find_element(By.ID, "nextButton").click()
-        time.sleep(settings['wait_timer'])
-        driver.find_element(By.ID, "checkTerms").click()
-        time.sleep(settings['wait_timer'])
-        driver.find_element(By.ID, "nextButton").click()
-        time.sleep(settings['wait_timer'])
-        driver.find_element(By.ID, "rms_batLocLocSel").click()
-        time.sleep(settings['wait_timer'])
-    driver.find_element(By.ID, "rms_batLocLocSel").click()
+    # driver.find_element(By.ID, "rms_batLocLocSel").click()
     time.sleep(settings['wait_timer'])
+    print("start select")
     select_box = driver.find_element(By.ID, "rms_batLocationSelect2")
     Select(select_box).select_by_value(sys.argv[1])
+    print("start select2")
     time.sleep(settings['wait_timer'])
+
     driver.find_element(By.ID, "nextButton").click()
     if (driver.find_element(By.ID, "getEarliestTime").size != 0):
         if (driver.find_element(By.ID, "getEarliestTime").is_displayed()):

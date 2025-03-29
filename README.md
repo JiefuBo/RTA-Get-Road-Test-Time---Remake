@@ -150,3 +150,4 @@ If the website is slow and the script fails at selecting the driving test on a n
 2. 增加了浏览器的判断，使适配Safari和Chrome。（2025-03-30）（✅）
 3. 需要在MD里面添加MyRTA仅适用于英文系统。（2025-03-30）（❌）
 4. 对于使用Safari的用户，需要让他们开启Safari的`开发者模式`以及`自动控制`。（2025-03-30）（❌）
+5. 关于用户网络环境造成页面延时，过慢的网络环境会导致`time.sleep(&)`超时。是否需要添加手动可调延时？（2025-03-30）（❌）
