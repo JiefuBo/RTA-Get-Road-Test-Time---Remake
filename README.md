@@ -139,8 +139,13 @@ If the website is slow and the script fails at selecting the driving test on a n
 *   更新了识别Safari和Chrome的代码，在`Setting.json`文件里面的`browser`修改参数，`1=Chrome, 0=Safari`。
 更新了识别 Safari 和 Chrome 的代码，在 `Setting.json` 文件里面的`浏览器`修改参数，`1=Chrome， 0=Safari`。
 
+# Contact me 联系开发者：
+[联系开发者并且向他发送一个BUG](mailto:noreply@visionstudio.asia?subject=ReportBUG)
 
-# 代办区：
+
+
+
+# 开发者代办区：
 1. 更新了www.myrta.com的网址，适用于没有账户密码的用户使用Family Name和Customer Number登录。（2025-03-30）（✅）
 2. 增加了浏览器的判断，使适配Safari和Chrome。（2025-03-30）（✅）
 3. 需要在MD里面添加MyRTA仅适用于英文系统。（2025-03-30）（❌）
